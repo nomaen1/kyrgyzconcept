@@ -1,0 +1,50 @@
+{% load static %}
+<div class="jp_top_header_main_wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="jp_top_header_left_wrapper">
+                    <div class="jp_top_header_left_cont">
+                        <p><i class="fa fa-phone"></i> &nbsp;Телефонный номер:  &nbsp;{{setting.phone}}</p>
+                        <p class=""><i class="fa fa-envelope"></i> &nbsp;Почта :&nbsp;<a >{{ setting.email}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="jp_top_header_right_wrapper">
+                    <div class="jp_top_header_right_cont">
+                     {% if user.is_authenticated%}
+
+                        <ul>
+                            <li><a href="{% url 'profile' request.user.id %}"><i class="fa fa-user"></i>Профиль</a></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-in"></i>Выйти</a></li>
+                        </ul>
+                     {% else %}
+                     <ul>
+                        <li><a href="{% url 'register' %}"><i class="fa fa-user"></i>Регистрация</a></li>
+                        <li><a href="{% url 'login'%}"><i class="fa fa-sign-in"></i>Войти</a></li>
+                    </ul>
+                    {% endif %}
+                    </div>
+                    <div class="jp_top_header_right__social_cont">
+                        <ul>
+                            {% if setting.tripadvisor%}
+                            <li><a href="{{setting.tripadvisor}}"><i class="fa fa-tripadvisor"></i></a></li>
+                            {% endif %}
+                            {% if setting.facebook%}
+                            <li><a href="{{setting.facebook}}"><i class="fa fa-facebook"></i></a></li>
+                            {% endif %}
+                            {% if setting.twitter%}
+                            <li><a href="{{setting.twitter}}"><i class="fa fa-twitter"></i></a></li>
+                            {% endif %}
+                            {% if setting.instagram%}
+                            <li><a href="{{setting.instagram}}"><i class="fa fa-instagram"></i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

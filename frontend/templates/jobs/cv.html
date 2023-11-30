@@ -1,0 +1,43 @@
+{% extends 'include/homepage.html'%}
+{% load static %}
+{% block content %}
+    <!-- Top Scroll End -->
+    <!-- Top Header Wrapper Start -->
+    {% include 'include/header.html' %}
+    <!-- Header Wrapper End -->
+    <!-- Header Wrapper End -->
+
+    <div class="jp_downlord_main_wrapper">
+        <div class="jp_downlord_img_overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm hidden-xs">
+                    <div class="jp_down_mob_img_wrapper">
+                        <img src="{% static 'images/content/mobail.png' %}" alt="mobail_img" />
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="ss_download_wrapper_details">
+                        <h3>Мы очень рады, что Вы хотите стать частью нашей команды!</h3>
+                        <p>Для того чтобы мы могли рассмотреть вашу кандидатуру, необходимо:<br>
+                            1. Заполнить анкету строго по нашей форме<br>
+                            2. Пройти тестирование<br>
+                            И мы свяжемся с Вами в течение 3 рабочих дней.</p>
+                        <a href="{% url 'cv_add' %}" class="ss_appstore"><span><i class="fa fa-edit" aria-hidden="true"></i></span> Использовать CV/</a>
+                        <a href="{% url 'cv_download' %}" class="ss_playstore"><span><i class="fa fa-file-word-o" aria-hidden="true"></i></span> Загрузить CV </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 visible-sm visible-xs">
+                    <div class="jp_down_mob_img_wrapper">
+                        <img src="{% static 'images/content/mobail.png' %}" class="img-responsive" alt="mobail_img" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jp downlord Wrapper End -->
+    <!-- jp Newsletter Wrapper Start -->
+    {% include 'include/footer.html' %}
+
+    <!-- jp footer Wrapper End -->
+{% endblock %}

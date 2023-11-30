@@ -1,0 +1,375 @@
+{% extends 'include/homepage.html'%}
+{% load static %}
+{% block content %}
+    <!-- Top Scroll End -->
+    <!-- Top Header Wrapper Start -->
+    {% include 'include/header.html' %}
+    <!-- Header Wrapper End -->
+    <!-- jp Tittle Wrapper Start -->
+    <div class="jp_tittle_main_wrapper">
+        <div class="jp_tittle_img_overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="jp_tittle_heading_wrapper">
+                        <div class="jp_tittle_heading">
+                            <h2>Заполнить CV</h2>
+                        </div>
+                        <div class="jp_tittle_breadcrumb_main_wrapper">
+                            <div class="jp_tittle_breadcrumb_wrapper">
+                                <ul>
+                                    <li><a href="{% url 'index' %}">Home</a> <i class="fa fa-angle-right"></i></li>
+                                    <li><a href="">Pages</a> <i class="fa fa-angle-right"></i></li>
+                                    <li>Заполнить CV</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jp Tittle Wrapper End -->
+
+    <!-- jp register wrapper start -->
+    <div class="register_section">
+        <!-- register_form_wrapper -->
+        <div class="register_tab_wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1" style="display: flex; justify-content: center;">
+                        <div role="tabpanel" style="display: flex; justify-content: center; width: 700px;">
+                            <div class="tab-content">
+                                <ul id="tabOne" class="nav register-tabs">
+                                    <li class="active"><a href="#contentOne-1" data-toggle="tab">Заполните CV <br></a>
+                                </ul>
+                                <div class="tab-pane fade in active register_left_form" id="contentOne-1">
+                                    <div class="row">
+                                        <form method ="POST" enctype="multipart/form-data" data-toggle="validator">
+                                            {% csrf_token %}  
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="cv">Ваше фото</label>
+                                                    <input type='file' name="avatar" onchange="readURL(this);" />
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="img-upload" style="display: flex; justify-content: center;">
+                                                        <img id="blah" src="{% static 'images/content/base.png' %}  " alt="your image" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
+                                                    <label for="">Номер телефона</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
+                                                    <input type="text" name="phone_number" value="" required>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Адрес прописки</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="address" value="" required>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Гражданство</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="citizenship" value="" required>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Дата рождения</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="date" name="birthday" value="" required>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
+                                                    <label for="">Пол</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
+                                                    <select type="form-select" name="gender" id="validationDefault04" required>
+                                                        <option>Мужской</option>
+                                                        <option>Женский</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Есть ли у вас дети?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="justify-content: center;">
+                                                    <input type="checkbox" name="child_yes" value="True"><label for="" style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                    <input type="checkbox" name="chil_no" value=""><label for="" style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                    <input type="text" placeholder="Имя ребенка" name="child_name" value="" style="margin-top: 5px;">
+                                                    <input type="date" placeholder="Дата рождения ребенка" name="child_birthday" value="">
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 15px;">
+                                                    <label for="">Источник информации о вакансии</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
+                                                    <select type="form-select" name="source" id="validationDefault04" required>
+                                                        <option>www.concept.kg</option>
+                                                        <option>www.job.kg</option>
+                                                        <option>Объявление в газете</option>
+                                                        <option>Знакомый(ая)</option>
+                                                        <option>Бегущая строка</option>
+                                                        <option>Рекрутинговое агенство</option>
+                                                        <option>Другое</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Почему Вы выбрали именно эту позицию?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="reason" value="" style="margin-bottom: 0;" required>
+                                                    <small>до 250 символов</small>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Готовы ли рассматривать другие позиции в Kyrgyz Concept?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="checkbox" name="interested_yes" value="">Да<br>
+                                                    <input type="checkbox" name="interested_no" value="">Нет
+                                                    <input type="text" name="reason" value="" placeholder="Укажите интересные для вас позиции" style="margin-top: 10px;">
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Можем ли мы рассматривать Вашу кандидатуру для наших партнеров?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="checkbox" name="candidate_yes" value="">Да<br>
+                                                    <input type="checkbox" name="candidate_no" value="">Нет
+                                                    <input type="text" value="" style="margin-top: 10px;">
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Проходили ли Вы общереспубликанское тестирование?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="checkbox" name="test_yes" value="">Да<br>
+                                                    <input type="checkbox" name="test_no" value="">Нет
+                                                    <div class="row" style="margin-top: 10px;">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="text" name="test_year" value="" placeholder="Год">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="text" name="test_score" value="" placeholder="Ваш балл">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Сдавали ли Вы TOEFL/IELTS?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="checkbox" name="exam_yes" value="">Да<br>
+                                                    <input type="checkbox" name="exam_no" value="">Нет
+                                                    <div class="row" style="margin-top: 10px;">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="text" name="exam_year" value="" placeholder="Год">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="text" name="exam_score" value="" placeholder="Ваш балл">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Собираетесь ли Вы в течение ближайших трех лет продолжить свое образование?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="checkbox" name="education_yes" value="">Да<br>
+                                                    <input type="checkbox" name="education_no" value="">Нет
+                                                    <input type="text" name="education_info" value="" placeholder="Напишите когда и где"  style="margin-top: 10px;">
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Повышение квалификации (участие в семинарах, тренингах, наличие сертификатов, прохождение курсов)</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="checkbox" name="qualification_yes" value="">Да<br>
+                                                    <input type="checkbox" name="qualification_no" value="">Нет
+                                                    <input type="text" name="qualification_name" value="" placeholder="Название"  style="margin-top: 10px;">
+                                                    <select type="form-select" name="qualification_country" id="validationDefault04" aria-placeholder="Выберите страну">
+                                                        <option>Кыргызстан</option>
+                                                        <option>Россия</option>
+                                                        <option>Казахстан</option>
+                                                    </select>
+                                                    <input type="text" name="qualification_city" value="" placeholder="Укажите город">
+                                                    <div class="row" style="margin-top: 10px;">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="qualification_start" value="" placeholder="Дата начала">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="qualification_end" value="" placeholder="Дата окончания">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Предыдущие места работы (включая опыт, не связанный с выбранной позицией)</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="organisation_name" value="" placeholder="Название организации"  style="margin-top: 10px;" required>
+                                                    <input type="text" name="organisation_address" value="" placeholder="Адрес организации"  style="margin-top: 10px;" required>
+                                                    <input type="text" name="job_title" value="" placeholder="Должность"  style="margin-top: 10px;" required>
+                                                    <div class="row" style="margin-top: 10px;">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="last_job_start" value="" placeholder="Дата начала" required>
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="last_job_end" value="" placeholder="Дата окончания" required>
+                                                        </div>
+                                                    </div>
+                                                    <textarea name="job_title_duty" id="" cols="30" rows="10" placeholder="Должностные обязанности" required></textarea>
+                                                    <textarea name="base_moves" id="" cols="30" rows="10" placeholder="Основные достижения" required></textarea>
+                                                    <textarea name="dismissal_reason" id="" cols="30" rows="10" placeholder="Причина увольнения" required></textarea>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Ваши рекомендатели</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="avisor" value="" placeholder="ФИО"  style="margin-top: 10px;" required>
+                                                    <input type="text" name="advisor_organisation" value="" placeholder="Организация"  style="margin-top: 10px;" required>
+                                                    <label for="">Период совместной работы</label>
+                                                    <div class="row" style="margin-top: 10px;">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="advisor_start" value="" placeholder="Дата начала" required>
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="advisor_end" value="" placeholder="Дата окончания" required>
+                                                        </div>
+                                                    </div>
+                                                    <textarea name="advisor_address" id="" cols="30" rows="10" placeholder="Адрес" style="margin-top: 10px;" required></textarea>
+                                                    <textarea name="advisor_phone" id="" cols="30" rows="10" placeholder="Телефон" required></textarea>
+                                                    <textarea name="advisor_socials" id="" cols="30" rows="10" placeholder="Соцсети" required></textarea>
+                                                    <select type="form-select" name="advisor_job" id="validationDefault04" aria-placeholder="Выберите должность" required>
+                                                        <option>Руководитель</option>
+                                                        <option>Коллега</option>
+                                                        <option>Родственные отношения</option>
+                                                        <option>Другое</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Желаемый размер Вашего вознаграждения на стажерский период</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                            <input type="text" placeholder="0" name="internship_salary" value="" style="margin-bottom: 0;" required>
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 25px;">
+                                                            <label for="">Сом</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                    <label for="">Желаемый размер Вашего вознаграждения на основной период</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                            <input type="text" placeholder="0" name="job_salary" value="" style="margin-bottom: 0;" required>
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 25px;">
+                                                            <label for="">Сом</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                    <label for="">Знание языков</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-8 col-sm-6 col-xs-8">
+                                                            <input type="text" name="language" value="" placeholder="какой язык"  style="margin-top: 10px;" required>
+                                                        </div>
+                                                        <div class="form-group col-md-4 col-sm-6 col-xs-4">
+                                                            <select type="form-select" name="language_knowledge" id="validationDefault04" required>
+                                                                <option value="">Не знаю</option>
+                                                                <option value="">Начинающий уровень</option>
+                                                                <option value="">Продолжающий уровень</option>
+                                                                <option value="">Продвинутый уровень</option>
+                                                                <option value="">Владею в совершенстве</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-8 col-sm-6 col-xs-8">
+                                                            <label for="">Сколько лет изучали</label>
+                                                        </div>
+                                                        <div class="form-group col-md-4 col-sm-6 col-xs-4">
+                                                            <input type="text" name="language_years" id="" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Компьютерные навыки</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="checkbox" name="docs" id=""> Google документы<br>
+                                                    <input type="checkbox" name="tables" id=""> Google таблицы<br>
+                                                    <input type="checkbox" name="presentaions" id=""> Google презентации<br>
+                                                    <input type="checkbox" name="prezi" id=""> Prezi <br>
+                                                    <input type="checkbox" name="touch_typing" id=""> Слепая печать<br>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Пребывание за границей</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <select type="form-select" name="abroad_country" id="validationDefault04">
+                                                        <option value="">США</option>
+                                                        <option value="">Канада</option>
+                                                        <option value="">Британия</option>
+                                                        <option value="">Италия</option>
+                                                        <option value="">Франция</option>
+                                                    </select>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="abroad_start" value="" placeholder="Дата начала"  style="margin-top: 10px;">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="abroad_end" value="" placeholder="Дата окончания"  style="margin-top: 10px;">
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" placeholder="Причина визита" name="abroad_reason" id="">
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Какими умениями, навыками, полезными для работы в Компании Вы обладаете?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <textarea name="good_skills" placeholder="Например, навыки продаж, игра на фортепиано или тайм-менеджмент  " id="" cols="30" rows="10" required></textarea>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 100px;">
+                                                    <label for="">Есть ли у Вас учетная запись вследующих социальных сетях/блогах?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 15px;">
+                                                    <img src="{% static 'images/content/linked.png' %}" alt="">
+                                                    <input type="text" name="linkedin"  placeholder="Вставьте ссылку" id="">
+                                                    <img src="{% static 'images/content/faceboook.png' %}" alt="">
+                                                    <input type="text" name="facebook" placeholder="Вставьте ссылку" id="">
+                                                    <img src="{% static 'images/content/twitter.png' %}" alt="">
+                                                    <input type="text" name="twitter" placeholder="Вставьте ссылку" id="">
+                                                </div>
+                                                <div class="login_btn_wrapper register_btn_wrapper login_wrapper ">
+                                                    <button type="submit"
+                                                        class="btn btn-primary login_btn">Загрузить Резюме
+                                                    </button>
+                                                </div>   
+                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="check-box text-center">
+                                                        <input type="checkbox" name="checkbox" id="account-option_1">
+                                                        &ensp;
+                                                        <label for="account-option_1">Я согласен с  
+                                                            <a href="" class="check_box_anchr">Условиями использования сайта, </a>
+                                                            регулирующимися команией Kyrgyz Concept
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                    </div>
+                                    <div class="login_message">
+                                        <p>Уже есть резюме? Отправьте его <a href="{% url 'cv_download' %}"> Сюда </a> </p> 
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jp register wrapper end -->
+
+    <!-- jp Newsletter Wrapper Start -->
+    {% include 'include/footer.html' %}
+
+    <!-- jp footer Wrapper End -->
+{% endblock %}

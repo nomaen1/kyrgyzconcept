@@ -1,0 +1,111 @@
+{% extends 'include/homepage.html'%}
+{% load static %}
+{% block content %}
+    <!-- Top Scroll End -->
+    <!-- Top Header Wrapper Start -->
+    {% include 'include/header.html' %}
+    <!-- Header Wrapper End -->
+    <!-- jp Tittle Wrapper Start -->
+    <div class="jp_tittle_main_wrapper">
+        <div class="jp_tittle_img_overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="jp_tittle_heading_wrapper">
+                        <div class="jp_tittle_heading">
+                            <h2>Заполнить CV</h2>
+                        </div>
+                        <div class="jp_tittle_breadcrumb_main_wrapper">
+                            <div class="jp_tittle_breadcrumb_wrapper">
+                                <ul>
+                                    <li><a href="#">Home</a> <i class="fa fa-angle-right"></i></li>
+                                    <li><a href="#">Pages</a> <i class="fa fa-angle-right"></i></li>
+                                    <li>Заполнить CV</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jp Tittle Wrapper End -->
+
+    <!-- jp register wrapper start -->
+    <div class="register_section">
+        <!-- register_form_wrapper -->
+        <div class="register_tab_wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div role="tabpanel">
+
+                            <!-- Nav tabs -->
+                            <ul id="tabOne" class="nav register-tabs">
+                                <li class="active"><a href="#contentOne-1" data-toggle="tab">Заполните CV <br>
+                                        </a>
+                                </li> 
+                                <!-- {% comment %} <li><a href="#contentOne-2" data-toggle="tab">company account <br> <span>We are hiring
+                                            Employees</span></a>
+                                </li> {% endcomment %} -->
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active register_left_form" id="contentOne-1">
+                                 
+                                    <div class="row">
+                                        <form method = "POST" data-toggle="validator" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-12 custom_input" required>
+                                                    <label for="cv">Ваше фото</label>
+                                                    <input type='file' name="avatar" onchange="readURL(this);" />
+                                                    <div class="img-upload">
+                                                        <img id="blah" src="{% static 'images/content/base.png' %}  " alt="your image" />
+                                                    </div>
+                                                </div>
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-12 custom_input" required>
+                                                    <label for="cv">Загрузите резюме</label>
+                                                    <input type="file" name="cv_file">
+                                                </div>
+                                                <div style="color: red">
+                                                    {% for message in messages %}
+                                                        {{ message }}
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="check-box text-center">
+                                                        <input type="checkbox" name="shipping-option" id="account-option_1">
+                                                        &ensp;
+                                                        <label for="account-option_1">Я согласен с 
+                                                            <a href="#"
+                                                                class="check_box_anchr">Условиями использования сайта, 
+                                                            </a>
+                                                                регулирующимися команией Kyrgyz Concept
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="login_btn_wrapper register_btn_wrapper login_wrapper ">
+                                                    <button type="submit"
+                                                        class="btn btn-primary login_btn">Отправить резюме</button>
+                                                    <!-- <a type="submit" href="javascript:;" class="btn btn-primary login_btn"> register </a> -->
+                                                </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jp register wrapper end -->
+
+    <!-- jp Newsletter Wrapper Start -->
+    {% include 'include/footer.html' %}
+
+    <!-- jp footer Wrapper End -->
+{% endblock %}

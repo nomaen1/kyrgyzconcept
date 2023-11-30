@@ -1,0 +1,44 @@
+{% load static %}
+<!-- Header Wrapper Start -->
+<div class="jp_top_header_img_wrapper">
+    <div class="jp_slide_img_overlay"></div>
+    <div class="gc_main_menu_wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-2 col-sm-12 col-xs-12 hidden-xs hidden-sm full_width">
+                    <div class="gc_header_wrapper" style="justify-content: center; display: flex;">
+                        <div class="gc_logo">
+                            <a href=""><img src="https://concept.kg/static/img/header-top/kyrgyz-concept-logo.svg" alt="Logo" title="Job Pro" class="img-responsive"></a>
+                        </div>
+                    </div>
+                </div>
+                {% if user.is_authenticated%}
+                <div class="col-lg-9 col-md-4 col-sm-12 col-xs-12 hidden-sm hidden-xs">
+                    <div class="jp_navi_right_btn_wrapper" style="justify-content: right; display: flex;">
+                        <ul>
+                            {% if user.user_cv.all %}
+                                <li><a href="{% url 'cv_add' %}"><i class="fa fa-user"></i>Использовать CV</a></li>
+                            {% else %}
+                                <li><a href="{% url 'cv_add' %}"><i class="fa fa-user"></i>Заполнить CV</a></li>
+                            {% endif %}
+                            <li><a href=""><i class="fa fa-sign-in"></i>Пройти тест</a></li>
+                            <li><a href="{% url 'profile' request.user.id %}"><i class="fa fa-user"></i> Профиль</a></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-in"></i>Выйти</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-lg-9 col-md-4 col-sm-12 col-xs-12 hidden-sm hidden-xs">
+                    <div class="jp_navi_right_btn_wrapper" style="justify-content: right; display: flex;">
+                        <ul>
+                            <li><a href="{% url 'register' %}"><i class="fa fa-user"></i> Регистрация</a></li>
+                            <li><a href="{% url 'login'%}"><i class="fa fa-sign-in"></i>Войти</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header Wrapper End -->
