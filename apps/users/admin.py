@@ -7,4 +7,10 @@ class SettingsFilterAdmin(admin.ModelAdmin):
     search_fields = ('title', 'descriptions')
 
 admin.site.register(Settings, SettingsFilterAdmin)
+
+class UserAdmin(admin.ModelAdmin):
+    list_filter = ("fullname", )
+    list_display = ("fullname", )
+    search_fields = ("fullname", )
+    
 admin.site.register(User)

@@ -4,9 +4,15 @@ from django_resized.forms import ResizedImageField
 # Create your models here.
 
 class User(AbstractUser):
+    profile_image = models.ImageField(upload_to='profile_image/', null=True, blank=True)
+    fullname = models.CharField(max_length=255, verbose_name="ФИО", null=True, blank=True)
     surname = models.CharField(max_length=100, verbose_name="Отчество")
+    phone_number = models.CharField(max_length=20, verbose_name="Номер телефона", null=True, blank=True)
+    address = models.CharField(max_length=100, verbose_name="Адрес", null=True, blank=True)
+
+
     def __str__(self):
-        return f"{self.username} {self.first_name} {self.last_name}"
+        return f"{self.email} - {self.fullname}"
     
     class Meta:
         verbose_name = "Пользователь"

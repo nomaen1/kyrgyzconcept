@@ -1,7 +1,6 @@
 {% extends 'include/homepage.html'%}
 {% load static %}
 {% load socialaccount %}
-{% providers_media_js %}
 {% block content %}
     <!-- Top Scroll End -->
     <!-- Top Header Wrapper Start -->
@@ -51,7 +50,7 @@
                             <div class="login_wrapper">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
-                                        <a href="{% provider_login_url 'facebook' method='js_sdk' %}" class="btn btn-primary"> <span>Войти с Facebook</span> <i class="fa fa-facebook"></i> </a>
+                                        <a href="{% provider_login_url 'facebook' %}" class="btn btn-primary"> <span>Войти с Facebook</span> <i class="fa fa-facebook"></i> </a>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
                                         <a href="{% provider_login_url 'google' %}" class="btn btn-primary google-plus"> Войти с  Google <i class="fa fa-google-plus"></i> </a>

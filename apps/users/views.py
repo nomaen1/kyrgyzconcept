@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib import messages
 
@@ -43,8 +44,6 @@ def register(request):
         user_login = authenticate(username=email, password=password)
         login(request, user_login)
 
-        messages.success(request, 'Вы успешно зарегистрированы. Теперь вы можете войти.')
-
         return redirect('/')
       
     return render(request, 'users/register.html', locals())
@@ -67,21 +66,27 @@ def user_login(request):
     
     return render(request, 'users/login.html', locals())
 
-def profile(request,id):
+@login_required(login_url="login")
+def profile(request, id):
     setting = Settings.objects.latest('id')
     user = User.objects.get(id=id)
+
+    if request.user.id != id:
+        return redirect('/')
+
     if request.method == "POST":
         if 'update_account' in request.POST:
-            first_name = request.POST.get('first_name')
+            fullname = request.POST.get('fullname')
             email = request.POST.get('email')
-            phone = request.POST.get('phone')
+            phone_number = request.POST.get('phone_number')
             address = request.POST.get('address')
-            user.first_name = first_name
-            user.phone = phone
+            user.fullname = fullname
+            user.phone_number = phone_number
             user.email = email
             user.address = address
             user.save()
             return redirect('profile', request.user.id)
+
         if 'change_password' in request.POST:
             old_password = request.POST['old_password']
             new_password1 = request.POST['new_password1']
@@ -97,17 +102,19 @@ def profile(request,id):
                     user.save()
                     
                     # Авторизуем пользователя с новым паролем
-                    user = authenticate(firstname=user.firstname, password=new_password1)
+                    user = authenticate(username=user.username, password=new_password1)
                     if user:
                         login(request, user)
 
                     messages.success(request, 'Пароль успешно изменен.')
+
         if 'profile_images' in request.POST:
-            firstname = request.POST.get('firstname')
+            username = request.POST.get('username')
             profile_image = request.FILES.get('profile_image')
-            user.firstname = firstname
+            user.username = username
             user.profile_image = profile_image
             user.save()
+
             return redirect('profile', request.user.id)
     return render(request, 'users/settings-profile.html', locals())
 

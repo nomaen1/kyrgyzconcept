@@ -31,11 +31,6 @@
              <div class="header-content">
                 <div class="header-left">
                    <div class="brand-logo"><a class="mini-logo" href="/"><img src="{% static 'profile/images/logoi.png' %}" alt="" width="40"></a></div>
-                   <div class="search">
-                      <form action="#">
-                         <div class="input-group"><input type="text" class="form-control" placeholder="Search Here"><span class="input-group-text"><i class="ri-search-line"></i></span></div>
-                      </form>
-                   </div>
                 </div>
                 <div class="header-right">
                    <div class="dark-light-toggle"><span class="dark"><i class="ri-moon-line"></i></span><span class="light"><i class="ri-sun-line"></i></span></div>
@@ -151,11 +146,11 @@
                                                 <label class="form-label">Имя пользователя</label>
                                                 <input type="text" name = "username" class="form-control" {% if user.username %} value="{{user.username}}" {% else %} placeholder="admin" {% endif %}>
                                             </div>
-                                            {% if user.profile_image%}
+                                            {% if user.profile_image %}
                                             <div class="col-xxl-12 col-12 mb-3">
                                                 <div class="d-flex align-items-center">
                                                     <img class="me-3 rounded-circle me-0 me-sm-3"
-                                                        src="{{user.profile_image.url}}" width="55" height="55" alt="">
+                                                        src="{{ user.profile_image.url }}" width="55" height="55" alt="">
                                                     <div class="media-body">
                                                         <h4 class="mb-0">{{user.username}}</h4>
                                                         <p class="mb-0">Максимальный размер фотографии 20мб
@@ -179,7 +174,6 @@
                                             <div class="col-xxl-12 col-12 mb-3">
                                                 <div class="form-file">
                                                     <input name="profile_image" type="file" class="form-file-input" >
-                                                    
                                                 </div>
                                             </div>
                                             <div class="col-xxl-12 col-12 mb-3">
@@ -205,14 +199,14 @@
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <label class="form-label">Новый пароль</label>
-                                                <input type="new_password" name = "new_password1" class="form-control" placeholder="**********">
+                                                <input name = "new_password1" type="password" class="form-control" placeholder="**********">
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <label class="form-label">Потвердите пароль</label>
                                                 <input name = "new_password2" type="password" class="form-control" placeholder="**********">
                                             </div>
                                             <div class="col-12 col-12 mb-3">
-                                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                                <button type="submit" name="change_password" class="btn btn-primary">Сохранить</button>
                                             </div>
                                         </div>
                                     </form>
@@ -231,18 +225,18 @@
                                         <div class="row g-4">
                                             <div class="col-xxl-6 col-xl-6 col-lg-6">
                                                 <label class="form-label">Полное Имя</label>
-                                                <input type="text" class="form-control" {% if user.first_name %} value="{{user.first_name}}" {% else %} placeholder="Эркинбаев Нурболот Ильязбекович" {% endif %}
-                                                    name="first_name">
+                                                <input type="text" class="form-control" {% if user.fullname %} value="{{ user.fullname}}" {% else %} placeholder="Тыныбеков Жанышбек Нурбекович" {% endif %}
+                                                    name="fullname">
                                             </div>
                                             <div class="col-xxl-6 col-xl-6 col-lg-6">
                                                 <label class="form-label">Почта</label>
-                                                <input type="email" class="form-control" {% if user.email %} value="{{user.email}}" {% else %} placeholder="example@gmail.com" {% endif %}
+                                                <input type="email" class="form-control" {% if user.email %} value="{{ user.email}}" {% else %} placeholder="example@gmail.com" {% endif %}
                                                     name="email">
                                             </div>
                                             <div class="col-xxl-6 col-xl-6 col-lg-6">
                                                 <label class="form-label">Телефонный номер</label>
-                                                <input type="text" class="form-control" {% if user.phone %} value="{{user.phone}}" {% else %} placeholder="0999-99-99-99" {% endif %}
-                                                    name="phone">
+                                                <input type="text" class="form-control" {% if user.phone_number %} value="{{ user.phone_number }}" {% else %} placeholder="0999-99-99-99" {% endif %}
+                                                    name="phone_number">
                                             </div>
                                             <div class="col-xxl-6 col-xl-6 col-lg-6">
                                                 <label class="form-label">Город</label>
@@ -250,7 +244,7 @@
                                                     name="address">
                                             </div>
                                             <div class="col-12">
-                                                <button  name="update_account" class="btn btn-primary pl-5 pr-5">Сохранить</button>
+                                                <button type="submit" name="update_account" class="btn btn-primary pl-5 pr-5">Сохранить</button>
                                             </div>
                                         </div>
                                     </form>

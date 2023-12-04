@@ -52,8 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
 
     'ckeditor',
-    
-    #apps
+
     'apps.users',
     'apps.jobs',
 ]

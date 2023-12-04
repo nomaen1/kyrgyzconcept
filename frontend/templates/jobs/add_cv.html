@@ -18,8 +18,7 @@
                         <div class="jp_tittle_breadcrumb_main_wrapper">
                             <div class="jp_tittle_breadcrumb_wrapper">
                                 <ul>
-                                    <li><a href="{% url 'index' %}">Home</a> <i class="fa fa-angle-right"></i></li>
-                                    <li><a href="">Pages</a> <i class="fa fa-angle-right"></i></li>
+                                    <li><a href="{% url 'index' %}">Вакансии</a> <i class="fa fa-angle-right"></i></li>
                                     <li>Заполнить CV</li>
                                 </ul>
                             </div>
@@ -38,18 +37,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1" style="display: flex; justify-content: center;">
-                        <div role="tabpanel" style="display: flex; justify-content: center; width: 700px;">
+                        <div role="tabpanel" style="display: flex; justify-content: center; width: 800px;">
                             <div class="tab-content">
                                 <ul id="tabOne" class="nav register-tabs">
                                     <li class="active"><a href="#contentOne-1" data-toggle="tab">Заполните CV <br></a>
                                 </ul>
                                 <div class="tab-pane fade in active register_left_form" id="contentOne-1">
                                     <div class="row">
-                                        <form method ="POST" enctype="multipart/form-data" data-toggle="validator">
+                                        <form method ="POST" id="children-form" enctype="multipart/form-data" data-toggle="validator">
                                             {% csrf_token %}  
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                     <label for="cv">Ваше фото</label>
-                                                    <input type='file' name="avatar" onchange="readURL(this);" />
+                                                    <input type='file' name="avatar" onchange="readURL(this);" required>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                     <div class="img-upload" style="display: flex; justify-content: center;">
@@ -60,19 +59,21 @@
                                                     <label for="">Номер телефона</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
-                                                    <input type="text" name="phone_number" value="" required>
+                                                    <input type="text" name="phone_number" placeholder="0 (XXX) XX-XX-XX" required>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                     <label for="">Адрес прописки</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                    <input type="text" name="address" value="" required>
+                                                    <input type="text" name="address" value="" style="margin-bottom: 0px;" required >
+                                                    <small>до 250 символов</small>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                     <label for="">Гражданство</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                    <input type="text" name="citizenship" value="" required>
+                                                    <input type="text" name="citizenship" style="margin-bottom: 0px;" value="" required>
+                                                    <small>до 250 символов</small>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                     <label for="">Дата рождения</label>
@@ -93,15 +94,21 @@
                                                     <label for="">Есть ли у вас дети?</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6" style="justify-content: center;">
-                                                    <input type="checkbox" name="child_yes" value="True"><label for="" style="padding-left: 10px; padding-right: 20px;">Да</label>
-                                                    <input type="checkbox" name="chil_no" value=""><label for="" style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                    <input type="checkbox" name="children" value="True" id="children_yes">
+                                                    <label for="children_yes" style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                    <input type="checkbox" name="children" value="False" id="children_no">
+                                                    <label for="children_no" style="padding-left: 10px; padding-right: 20px;">Нет</label>
                                                     <input type="text" placeholder="Имя ребенка" name="child_name" value="" style="margin-top: 5px;">
                                                     <input type="date" placeholder="Дата рождения ребенка" name="child_birthday" value="">
+                                                    <br>
+                                                    <br>
+                                                    <button type="button" class="add-child">Добавить</button>
+                                                    <button type="button" class="remove-child">Удалить</button>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 15px;">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 30px;">
                                                     <label for="">Источник информации о вакансии</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
                                                     <select type="form-select" name="source" id="validationDefault04" required>
                                                         <option>www.concept.kg</option>
                                                         <option>www.job.kg</option>
@@ -119,28 +126,33 @@
                                                     <input type="text" name="reason" value="" style="margin-bottom: 0;" required>
                                                     <small>до 250 символов</small>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
                                                     <label for="">Готовы ли рассматривать другие позиции в Kyrgyz Concept?</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                    <input type="checkbox" name="interested_yes" value="">Да<br>
-                                                    <input type="checkbox" name="interested_no" value="">Нет
-                                                    <input type="text" name="reason" value="" placeholder="Укажите интересные для вас позиции" style="margin-top: 10px;">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
+                                                    <input type="checkbox" name="interested" value="True">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                    <input type="checkbox" name="interested" value="False">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                    <input type="text" name="interested_position" value="" placeholder="Укажите интересные для вас позиции" style="margin-top: 10px;">
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                     <label for="">Можем ли мы рассматривать Вашу кандидатуру для наших партнеров?</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                    <input type="checkbox" name="candidate_yes" value="">Да<br>
-                                                    <input type="checkbox" name="candidate_no" value="">Нет
-                                                    <input type="text" value="" style="margin-top: 10px;">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 25px;">
+                                                    <input type="checkbox" name="candidate" value="True">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                    <input type="checkbox" name="candidate" value="False">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 25px;">
                                                     <label for="">Проходили ли Вы общереспубликанское тестирование?</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                    <input type="checkbox" name="test_yes" value="">Да<br>
-                                                    <input type="checkbox" name="test_no" value="">Нет
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 25px;">
+                                                    <input type="checkbox" name="test" value="True">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                    <input type="checkbox" name="test" value="False">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
                                                     <div class="row" style="margin-top: 10px;">
                                                         <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                             <input type="text" name="test_year" value="" placeholder="Год">
@@ -154,8 +166,10 @@
                                                     <label for="">Сдавали ли Вы TOEFL/IELTS?</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                    <input type="checkbox" name="exam_yes" value="">Да<br>
-                                                    <input type="checkbox" name="exam_no" value="">Нет
+                                                    <input type="checkbox" name="exam" value="True">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                    <input type="checkbox" name="exam" value="False">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
                                                     <div class="row" style="margin-top: 10px;">
                                                         <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                             <input type="text" name="exam_year" value="" placeholder="Год">
@@ -169,16 +183,20 @@
                                                     <label for="">Собираетесь ли Вы в течение ближайших трех лет продолжить свое образование?</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                    <input type="checkbox" name="education_yes" value="">Да<br>
-                                                    <input type="checkbox" name="education_no" value="">Нет
+                                                    <input type="checkbox" name="education" value="True">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                    <input type="checkbox" name="education" value="False">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
                                                     <input type="text" name="education_info" value="" placeholder="Напишите когда и где"  style="margin-top: 10px;">
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                     <label for="">Повышение квалификации (участие в семинарах, тренингах, наличие сертификатов, прохождение курсов)</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                    <input type="checkbox" name="qualification_yes" value="">Да<br>
-                                                    <input type="checkbox" name="qualification_no" value="">Нет
+                                                    <input type="checkbox" name="qualification" value="True">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                    <input type="checkbox" name="qualification" value="False">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
                                                     <input type="text" name="qualification_name" value="" placeholder="Название"  style="margin-top: 10px;">
                                                     <select type="form-select" name="qualification_country" id="validationDefault04" aria-placeholder="Выберите страну">
                                                         <option>Кыргызстан</option>
@@ -195,10 +213,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 180px;">
                                                     <label for="">Предыдущие места работы (включая опыт, не связанный с выбранной позицией)</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 30px;">
                                                     <input type="text" name="organisation_name" value="" placeholder="Название организации"  style="margin-top: 10px;" required>
                                                     <input type="text" name="organisation_address" value="" placeholder="Адрес организации"  style="margin-top: 10px;" required>
                                                     <input type="text" name="job_title" value="" placeholder="Должность"  style="margin-top: 10px;" required>
@@ -214,10 +232,10 @@
                                                     <textarea name="base_moves" id="" cols="30" rows="10" placeholder="Основные достижения" required></textarea>
                                                     <textarea name="dismissal_reason" id="" cols="30" rows="10" placeholder="Причина увольнения" required></textarea>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 200px;">
                                                     <label for="">Ваши рекомендатели</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
                                                     <input type="text" name="avisor" value="" placeholder="ФИО"  style="margin-top: 10px;" required>
                                                     <input type="text" name="advisor_organisation" value="" placeholder="Организация"  style="margin-top: 10px;" required>
                                                     <label for="">Период совместной работы</label>
@@ -230,7 +248,7 @@
                                                         </div>
                                                     </div>
                                                     <textarea name="advisor_address" id="" cols="30" rows="10" placeholder="Адрес" style="margin-top: 10px;" required></textarea>
-                                                    <textarea name="advisor_phone" id="" cols="30" rows="10" placeholder="Телефон" required></textarea>
+                                                    <input type="text" name="advisor_phone" placeholder="Телефон" required></input>
                                                     <textarea name="advisor_socials" id="" cols="30" rows="10" placeholder="Соцсети" required></textarea>
                                                     <select type="form-select" name="advisor_job" id="validationDefault04" aria-placeholder="Выберите должность" required>
                                                         <option>Руководитель</option>
@@ -239,10 +257,10 @@
                                                         <option>Другое</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 40px;">
                                                     <label for="">Желаемый размер Вашего вознаграждения на стажерский период</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
                                                     <div class="row">
                                                         <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
                                                             <input type="text" placeholder="0" name="internship_salary" value="" style="margin-bottom: 0;" required>
@@ -252,12 +270,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 30px;">
                                                     <label for="">Желаемый размер Вашего вознаграждения на основной период</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                     <div class="row">
-                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 30px;">
                                                             <input type="text" placeholder="0" name="job_salary" value="" style="margin-bottom: 0;" required>
                                                         </div>
                                                         <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 25px;">
@@ -265,21 +283,21 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 40px;">
                                                     <label for="">Знание языков</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                                     <div class="row">
                                                         <div class="form-group col-md-8 col-sm-6 col-xs-8">
-                                                            <input type="text" name="language" value="" placeholder="какой язык"  style="margin-top: 10px;" required>
+                                                            <input type="text" name="language" value="" placeholder="какой язык"  style="margin-top: 25px;" required>
                                                         </div>
-                                                        <div class="form-group col-md-4 col-sm-6 col-xs-4">
+                                                        <div class="form-group col-md-4 col-sm-6 col-xs-4" style="margin-top: 25px;">
                                                             <select type="form-select" name="language_knowledge" id="validationDefault04" required>
-                                                                <option value="">Не знаю</option>
-                                                                <option value="">Начинающий уровень</option>
-                                                                <option value="">Продолжающий уровень</option>
-                                                                <option value="">Продвинутый уровень</option>
-                                                                <option value="">Владею в совершенстве</option>
+                                                                <option>Не знаю</option>
+                                                                <option>Начинающий уровень</option>
+                                                                <option>Продолжающий уровень</option>
+                                                                <option>Продвинутый уровень</option>
+                                                                <option>Владею в совершенстве</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-8 col-sm-6 col-xs-8">
@@ -300,10 +318,10 @@
                                                     <input type="checkbox" name="prezi" id=""> Prezi <br>
                                                     <input type="checkbox" name="touch_typing" id=""> Слепая печать<br>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 70px;">
                                                     <label for="">Пребывание за границей</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
                                                     <select type="form-select" name="abroad_country" id="validationDefault04">
                                                         <option value="">США</option>
                                                         <option value="">Канада</option>
@@ -319,39 +337,161 @@
                                                             <input type="date" name="abroad_end" value="" placeholder="Дата окончания"  style="margin-top: 10px;">
                                                         </div>
                                                     </div>
-                                                    <input type="text" placeholder="Причина визита" name="abroad_reason" id="">
+                                                    <input type="text" placeholder="Причина визита" name="abroad_reason" id="" style="margin-top: 10px;">
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 40px;">
                                                     <label for="">Какими умениями, навыками, полезными для работы в Компании Вы обладаете?</label>
                                                 </div>
-                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 30px;">
                                                     <textarea name="good_skills" placeholder="Например, навыки продаж, игра на фортепиано или тайм-менеджмент  " id="" cols="30" rows="10" required></textarea>
+                                                    <small>до 250 символов</small>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 100px;">
                                                     <label for="">Есть ли у Вас учетная запись вследующих социальных сетях/блогах?</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 15px;">
                                                     <img src="{% static 'images/content/linked.png' %}" alt="">
-                                                    <input type="text" name="linkedin"  placeholder="Вставьте ссылку" id="">
+                                                    <input type="url" name="linkedin"  placeholder="Вставьте ссылку" id="">
                                                     <img src="{% static 'images/content/faceboook.png' %}" alt="">
-                                                    <input type="text" name="facebook" placeholder="Вставьте ссылку" id="">
+                                                    <input type="url" name="facebook" placeholder="Вставьте ссылку" id="">
                                                     <img src="{% static 'images/content/twitter.png' %}" alt="">
-                                                    <input type="text" name="twitter" placeholder="Вставьте ссылку" id="">
+                                                    <input type="url" name="twitter" placeholder="Вставьте ссылку" id="">
                                                 </div>
-                                                <div class="login_btn_wrapper register_btn_wrapper login_wrapper ">
-                                                    <button type="submit"
+                                                <hr>
+                                                <div class="form-group col-md-12 col-sm-12 col-xs-12" style="margin-top: 15px; text-align: center; border-top: 1px solid #e4e4e4; border-bottom: 1px solid #e4e4e4;">
+                                                    <h4 style="padding: 20px;">Вы можете заполнить дополнительную информацию. Это не обязательно, но поможет нам лучше оценить Вашу кандидатуру</h4>
+                                                    
+                                                    <a href="">Скрыть</a>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 150px;">
+                                                    <label for="">Образование</label>
+                                                 </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                    <input type="text" name="university" value="" placeholder="Название ВУЗа"  style="margin-top: 10px;">
+                                                    <input type="text" name="faculty" value="" placeholder="Факультет"  style="margin-top: 10px;">
+                                                    <div class="row" style="margin-top: 10px;">
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="edu_start" value="" placeholder="Дата начала">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="edu4_end" value="" placeholder="Дата окончания">
+                                                        </div>
+                                                    </div>
+                                                    <select class="form-select" name="edu_country" id="validationDefault04" style="margin-top: 10px;" ari-placeholder="Выберите страну">
+                                                        <option value="Кыргызстан">Кыргызстан</option>
+                                                        <option value="Россия">Россия</option>
+                                                        <option value="Казахстан">Казахстан</option>
+                                                    </select>
+                                                    <input type="text" name="edu_city" placeholder="Город"></input>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Какие у Вас планы на ближайшие 3 - 5 лет?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="plan" value="" style="margin-bottom: 0;">
+                                                    <small>до 250 символов</small>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Ваши увлечения, хобби</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="hobby" value="" style="margin-bottom: 0;">
+                                                    <small>до 250 символов</small>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Кто такой Джон Голт?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="who" value="" style="margin-bottom: 0;">
+                                                    <small>до 250 символов</small>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Назовите 3 Ваших лучших качества (которые будут полезны в Вашей работе)</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="top_qualities" value="" style="margin-bottom: 0;">
+                                                    <small>до 100 символов</small>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <label for="">Назовите 3 Ваших худших качества (которые будут полезны в Вашей работе)</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                    <input type="text" name="worst_qualities" value="" style="margin-bottom: 0;">
+                                                    <small>до 100 символов</small>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 200px;">
+                                                    <label for="">Есть ли среди Ваших родственников, друзей - Клиенты, Партнеры Компании Kyrgyz Concept?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                    <input type="text" name="acq" value="" placeholder="ФИО"  style="margin-top: 10px;">
+                                                    <input type="text" name="acq_org" value="" placeholder="Организация"  style="margin-top: 10px;">
+                                                    <select type="form-select" name="acq_job" id="validationDefault04" aria-placeholder="Выберите должность">
+                                                        <option>Руководитель</option>
+                                                        <option>Коллега</option>
+                                                        <option>Родственные отношения</option>
+                                                        <option>Другое</option>
+                                                    </select>
+                                                    <div class="row" style="margin-top: 10px;">
+                                                        <label for="">Период совместной работы</label>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="acq_start" value="" placeholder="Дата начала">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                                            <input type="date" name="acq_end" value="" placeholder="Дата окончания">
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="acq_address" placeholder="Адрес" style="margin-top: 10px;"></input>
+                                                    <input type="text" name="acq_phone" placeholder="Телефон"></input>
+                                                    <input type="text" name="acq_email" placeholder="Email"></input>
+                                                    <input type="text" name="acq_socials" placeholder="Аккаунт в соц.сетях"></input>
+                                                </div>
+                                                <div>
+                                                    <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                        <label for="">Опишите какое-либо свое достижение за последние три года (которое характеризует Вас как личность, подходящую для занятия позиции в Компании)</label>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 50px;">
+                                                        <input type="text" name="achievement" value="" style="margin-bottom: 0;">
+                                                        <small>до 250 символов</small>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                    <label for="">Что Вам известно о компании Kyrgyz Concept? Почему Вы хотите с ней сотрудничать?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 30px;">
+                                                    <input type="text" name="knowledge" value="" style="margin-bottom: 0;">
+                                                    <small>до 250 символов</small>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                    <label for="">Назовите историческую личность, которой Вы восхищаетесь, и объясните Ваш выбор</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                    <input type="text" name="historical_person" value="" style="margin-bottom: 0;">
+                                                    <small>до 250 символов</small>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                    <label for="">Имеется ли у Вас ноутбук?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;" style="justify-content: center;">
+                                                    <input type="checkbox" name="laptop" value="True">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                    <input type="checkbox" name="laptop" value="False">
+                                                    <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
+                                                    <label for="">Что в предложенной форме резюме Вы предложили бы изменить?</label>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 30px;">
+                                                    <input type="text" name="change" value="" style="margin-bottom: 0;">
+                                                    <small>до 250 символов</small>
+                                                </div>
+                                                <div class="form-group col-md-12 col-sm-12 col-xs-12" style="text-align: center; padding: 20px; margin-top: 20px; border-top: 1px solid #e4e4e4; border-bottom: 1px solid #e4e4e4;">
+                                                    <h4>«Нет хороших или плохих кандидатов, хороших или плохих компаний, есть подходящие или неподходящие друг к другу»</h4>
+                                                </div> 
+
+                                                <div class="login_btn_wrapper register_btn_wrapper login_wrapper">
+                                                    <button type="submit" style="margin-top: 20px;"
                                                         class="btn btn-primary login_btn">Загрузить Резюме
                                                     </button>
-                                                </div>   
-                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                    <div class="check-box text-center">
-                                                        <input type="checkbox" name="checkbox" id="account-option_1">
-                                                        &ensp;
-                                                        <label for="account-option_1">Я согласен с  
-                                                            <a href="" class="check_box_anchr">Условиями использования сайта, </a>
-                                                            регулирующимися команией Kyrgyz Concept
-                                                        </label>
-                                                    </div>
                                                 </div>
                                         </form>
                                     </div>

@@ -20,9 +20,38 @@
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="jp_header_form_wrapper" style="text-align: center;">
-                            <a style="color: white; padding-right: 40px;" href="philosophy">Философия компании Kyrgyz Concept</a>
-                            <a style="color: white; padding-left: 100px;" href="philosophy">Мы вам напишем</a>
+                        <div class="jp_header_form_wrapper" style="text-align: center; background-color: transparent;">
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div style="height: 100px; width: 100px; transform: translateX(110px); background-color: #ffffff24; border-radius: 100%;"></div>
+                                <br>
+                                <h3 style="color: white;">Зарегистрируйтесь</h3> 
+                                <br>
+                                <button style="padding: 10px; background-color: #f36969; border-radius: 20px; border: 0"><a href="https://concept.kg/philosophy" style="color: white;">Философия Kyrgyz Concept</a></button>                               
+                            </div>
+                                {% if user.user_cv.all or user.user_ready_cv.all %}
+                                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                    <div style="height: 100px; width: 100px; transform: translateX(110px); background-color: #ffffff24; border-radius: 100%;"></div>
+                                    <br>
+                                    <h3 style="color: white;">Использовать CV</h3>
+                                    <br>
+                                    <button style="padding: 10px; background-color: #f36969; color: white; border-radius: 20px; border: 0"><a href="https://concept.kg/media/vacancy/codex/KCcodex_2.pdf" style="color: white;">Корпоротивный кодекс</a></button>                               
+                                </div>
+                                {% else %}
+                                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                    <div style="height: 100px; width: 100px; transform: translateX(110px); background-color: #ffffff24; border-radius: 100%;"></div>
+                                    <br>
+                                    <h3 style="color: white;">Заполнить CV</h3>
+                                    <br>
+                                    <button style="padding: 10px; background-color: #f36969; color: white; border-radius: 20px; border: 0" style="color: white;"><a href="https://concept.kg/media/vacancy/codex/KCcodex_2.pdf" style="color: white;">Корпоротивный кодекс</a></button>                               
+                                </div>
+                                {% endif %}
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div style="height: 100px; width: 100px; transform: translateX(110px); background-color: #ffffff24; border-radius: 100%;"></div>
+                                <br>
+                                <h3 style="color: white;">Мы позвоним тебе</h3> 
+                                <br>
+                                <button style="padding: 10px; background-color: #f36969; color: white; border-radius: 20px; border: 0"><a href="https://concept.kg/six_stories/" style="color: white;">6 историй успеха от сотрудников Kyrgyz Concept</a></button>                               
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -93,7 +122,7 @@
                                         </div>
                                     {% endfor %}
                                     
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-sm hidden-xs">
+                                    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-sm hidden-xs">
                                         <div class="pager_wrapper gc_blog_pagination">
                                             <ul class="pagination">
                                                 <li><a href="#">Priv.</a></li>
@@ -104,7 +133,7 @@
                                                 <li><a href="#">Next</a></li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -368,12 +397,7 @@
             </div>
         </div>
     </div>
-    <!-- jp listing sidebar Wrapper End -->
-    <!-- jp downlord Wrapper Start -->
- 
-    <!-- jp downlord Wrapper End -->
-    <!-- jp Newsletter Wrapper Start -->
+    
     {% include 'include/footer.html' %}
 
-    <!-- jp footer Wrapper End -->
 {% endblock %}
