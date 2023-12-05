@@ -3,9 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import datetime
 
-from django.core.mail import EmailMessage
-from django.views import View
-from django.urls import reverse
 from docx import Document
 from io import BytesIO
 from reportlab.pdfgen import canvas
