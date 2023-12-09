@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_resized.forms import ResizedImageField
-# Create your models here.
 
 class User(AbstractUser):
     profile_image = models.ImageField(upload_to='profile_image/', null=True, blank=True)
@@ -21,7 +20,7 @@ class User(AbstractUser):
 class Settings(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название сайта")
     descriptions = models.TextField(verbose_name="Описание сайта")
-    logo = models.ImageField(upload_to="logo/", verbose_name="Логотип")
+    logo = models.URLField(verbose_name="Логотип")
     phone = models.CharField(max_length=255, verbose_name='Телефон номер')
     email = models.EmailField(max_length=255, verbose_name='Почта')
     location = models.CharField(max_length=255, verbose_name='Адрес')

@@ -12,19 +12,20 @@
                         </div>
                     </div>
                 </div>
-                {% if user.is_authenticated%}
+                {% if user.is_authenticated %}
                 <div class="col-lg-9 col-md-4 col-sm-12 col-xs-12 hidden-sm hidden-xs">
                     <div class="jp_navi_right_btn_wrapper" style="justify-content: right; display: flex;">
                         <ul>
-                            {% if user.user_cv.all or user.user_ready_cv.all %}
-                                <li><a href="cv_add"><i class="fa fa-user"></i>Использовать CV</a></li>
+                            {% if cv or cv2 %}
+                                <li><a href=""><i class="fa fa-sign-in"></i>Пройти тест</a></li>
+                                <li><a href="{% url 'profile' request.user.id %}"><i class="fa fa-user"></i> Профиль </a></li>
+                                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-in"></i>Выйти</a></li>
                             {% else %}
                                 <li><a href="cv"><i class="fa fa-user"></i>Заполнить CV</a></li>
+                                <li><a href=""><i class="fa fa-sign-in"></i>Пройти тест</a></li>
+                                <li><a href="{% url 'profile' request.user.id %}"><i class="fa fa-user"></i> Профиль </a></li>
+                                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-in"></i>Выйти</a></li>      
                             {% endif %}
-                            
-                            <li><a href=""><i class="fa fa-sign-in"></i>Пройти тест</a></li>
-                            <li><a href="{% url 'profile' request.user.id %}"><i class="fa fa-user"></i> Профиль</a></li>
-                            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-in"></i>Выйти</a></li>
                         </ul>
                     </div>
                 </div>

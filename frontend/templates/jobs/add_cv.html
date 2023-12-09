@@ -155,10 +155,10 @@
                                                     <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
                                                     <div class="row" style="margin-top: 10px;">
                                                         <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                            <input type="text" name="test_year" value="" placeholder="Год">
+                                                            <input type="number" name="test_year" value="" placeholder="Год">
                                                         </div>
                                                         <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                            <input type="text" name="test_score" value="" placeholder="Ваш балл">
+                                                            <input type="number" name="test_score" value="" placeholder="Ваш балл">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -172,10 +172,10 @@
                                                     <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
                                                     <div class="row" style="margin-top: 10px;">
                                                         <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                            <input type="text" name="exam_year" value="" placeholder="Год">
+                                                            <input type="number" name="exam_year" value="" placeholder="Год">
                                                         </div>
                                                         <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                            <input type="text" name="exam_score" value="" placeholder="Ваш балл">
+                                                            <input type="number" name="exam_score" value="" placeholder="Ваш балл">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -198,10 +198,12 @@
                                                     <input type="checkbox" name="qualification" value="False">
                                                     <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
                                                     <input type="text" name="qualification_name" value="" placeholder="Название"  style="margin-top: 10px;">
-                                                    <select type="form-select" name="qualification_country" id="validationDefault04" aria-placeholder="Выберите страну">
-                                                        <option>Кыргызстан</option>
-                                                        <option>Россия</option>
-                                                        <option>Казахстан</option>
+                                                    <select type="form-select" name="qualification_country" id="validationDefault04">
+                                                        <option value="">США</option>
+                                                        <option value="">Канада</option>
+                                                        <option value="">Британия</option>
+                                                        <option value="">Италия</option>
+                                                        <option value="">Франция</option>
                                                     </select>
                                                     <input type="text" name="qualification_city" value="" placeholder="Укажите город">
                                                     <div class="row" style="margin-top: 10px;">
@@ -236,7 +238,7 @@
                                                     <label for="">Ваши рекомендатели</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
-                                                    <input type="text" name="avisor" value="" placeholder="ФИО"  style="margin-top: 10px;" required>
+                                                    <input type="text" name="advisor" value="" placeholder="ФИО"  style="margin-top: 10px;" required>
                                                     <input type="text" name="advisor_organisation" value="" placeholder="Организация"  style="margin-top: 10px;" required>
                                                     <label for="">Период совместной работы</label>
                                                     <div class="row" style="margin-top: 10px;">
@@ -250,7 +252,7 @@
                                                     <textarea name="advisor_address" id="" cols="30" rows="10" placeholder="Адрес" style="margin-top: 10px;" required></textarea>
                                                     <input type="text" name="advisor_phone" placeholder="Телефон" required></input>
                                                     <textarea name="advisor_socials" id="" cols="30" rows="10" placeholder="Соцсети" required></textarea>
-                                                    <select type="form-select" name="advisor_job" id="validationDefault04" aria-placeholder="Выберите должность" required>
+                                                    <select type="form-select" name="advisor_job" id="validationDefault04">
                                                         <option>Руководитель</option>
                                                         <option>Коллега</option>
                                                         <option>Родственные отношения</option>
@@ -312,22 +314,21 @@
                                                     <label for="">Компьютерные навыки</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                                    <input type="checkbox" name="docs" id=""> Google документы<br>
-                                                    <input type="checkbox" name="tables" id=""> Google таблицы<br>
-                                                    <input type="checkbox" name="presentaions" id=""> Google презентации<br>
-                                                    <input type="checkbox" name="prezi" id=""> Prezi <br>
-                                                    <input type="checkbox" name="touch_typing" id=""> Слепая печать<br>
+                                                    <input type="checkbox" value="True" name="docs" id=""> Google документы<br>
+                                                    <input type="checkbox" value="True" name="tables" id=""> Google таблицы<br>
+                                                    <input type="checkbox" value="True" name="presentaions" id=""> Google презентации<br>
+                                                    <input type="checkbox" value="True" name="prezi" id=""> Prezi <br>
+                                                    <input type="checkbox" value="True" name="touch_typing" id=""> Слепая печать<br>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 70px;">
                                                     <label for="">Пребывание за границей</label>
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
                                                     <select type="form-select" name="abroad_country" id="validationDefault04">
-                                                        <option value="">США</option>
-                                                        <option value="">Канада</option>
-                                                        <option value="">Британия</option>
-                                                        <option value="">Италия</option>
-                                                        <option value="">Франция</option>
+                                                        <option>Кыргызстан</option>
+                                                        <option>США</option>
+                                                        <option>Россия</option>
+                                                        <option>Швеция</option>
                                                     </select>
                                                     <div class="row">
                                                         <div class="form-group col-md-6 col-sm-6 col-xs-6">
@@ -377,10 +378,12 @@
                                                             <input type="date" name="edu4_end" value="" placeholder="Дата окончания">
                                                         </div>
                                                     </div>
-                                                    <select class="form-select" name="edu_country" id="validationDefault04" style="margin-top: 10px;" ari-placeholder="Выберите страну">
-                                                        <option value="Кыргызстан">Кыргызстан</option>
-                                                        <option value="Россия">Россия</option>
-                                                        <option value="Казахстан">Казахстан</option>
+                                                    <select type="form-select" name="edu_country" id="validationDefault04">
+                                                        <option value="">США</option>
+                                                        <option value="">Канада</option>
+                                                        <option value="">Британия</option>
+                                                        <option value="">Италия</option>
+                                                        <option value="">Франция</option>
                                                     </select>
                                                     <input type="text" name="edu_city" placeholder="Город"></input>
                                                 </div>
@@ -425,11 +428,11 @@
                                                 <div class="form-group col-md-6 col-sm-6 col-xs-6" style="margin-top: 20px;">
                                                     <input type="text" name="acq" value="" placeholder="ФИО"  style="margin-top: 10px;">
                                                     <input type="text" name="acq_org" value="" placeholder="Организация"  style="margin-top: 10px;">
-                                                    <select type="form-select" name="acq_job" id="validationDefault04" aria-placeholder="Выберите должность">
-                                                        <option>Руководитель</option>
-                                                        <option>Коллега</option>
-                                                        <option>Родственные отношения</option>
-                                                        <option>Другое</option>
+                                                    <select type="form-select" name="acq_country" id="validationDefault04">
+                                                        <option value="">Руководитель</option>
+                                                        <option value="">Коллега</option>
+                                                        <option value="">Родственные отношения</option>
+                                                        <option value="">Другое</option>
                                                     </select>
                                                     <div class="row" style="margin-top: 10px;">
                                                         <label for="">Период совместной работы</label>

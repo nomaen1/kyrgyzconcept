@@ -15,6 +15,15 @@ from apps.jobs.models import Jobs, CV, ReadyCV
 def index(request):
     jobs = Jobs.objects.all()
     setting = Settings.objects.latest('id')
+    try:
+        cv = CV.objects.get(user=request.user)
+    except:
+        pass
+
+    try:
+        cv2 = ReadyCV.objects.get(user=request.user)
+    except:
+        pass
     return render(request, "jobs/company_listing.html", locals())
 
 @login_required(login_url='login')
@@ -26,7 +35,6 @@ def jobs_detail(request, id):
     return render(request, 'jobs/listing_single.html', locals())
 
 
-# CV
 def cv(request):
     setting = Settings.objects.latest('id')
     return render(request, "jobs/cv.html", locals())
@@ -34,47 +42,47 @@ def cv(request):
 def cv_add(request):
     setting = Settings.objects.latest('id')
 
-    if request.method == 'POST':
+    if request.method == "POST":
         avatar = request.FILES.get('avatar')
         phone_number = request.POST.get('phone_number')
         address = request.POST.get('address')
         citizenship = request.POST.get('citizenship')
-        birthday_str = request.POST.get('birthday')
+        birthday = request.POST.get('birthday')
         gender = request.POST.get('gender')
         children= request.POST.get('children', False)
         child_name = request.POST.get('child_name')
-        child_birthday_str = request.POST.get('child_birthday')
+        child_birthday = request.POST.get('child_birthday')
         source = request.POST.get('source')
         reason = request.POST.get('reason')
-        interested = request.POST.get('interested')
+        interested = request.POST.get('interested', False)
         interested_position = request.POST.get('interested_position')
-        candidate = request.POST.get('candidate')
-        test = request.POST.get('test')
+        candidate = request.POST.get('candidate', False)
+        test = request.POST.get('test', False)
         test_year= request.POST.get('test_year')
         test_score = request.POST.get('test_score')
-        exam = request.POST.get('exam')
+        exam = request.POST.get('exam', False)
         exam_year = request.POST.get('exam_year')
         exam_score = request.POST.get('exam_score')
-        education = request.POST.get('education')
+        education = request.POST.get('education', False)
         education_info = request.POST.get('education_info')
-        qualification = request.POST.get('qualification')
+        qualification = request.POST.get('qualification', False)
         qualification_name = request.POST.get('qualification_name')
         qualification_country = request.POST.get('qualification_country')
         qualification_city = request.POST.get('qualification_city')
-        qualification_start_str = request.POST.get('qualification_start')
-        qualification_end_str = request.POST.get('qualification_end')
+        qualification_start = request.POST.get('qualification_start')
+        qualification_end = request.POST.get('qualification_end')
         organisation_name = request.POST.get('organisation_name')
         organisation_address = request.POST.get('organisation_address')
         job_title = request.POST.get('job_title')
-        last_job_start_str = request.POST.get('last_job_start')
-        last_job_end_str = request.POST.get('last_job_end')
+        last_job_start = request.POST.get('last_job_start')
+        last_job_end = request.POST.get('last_job_end')
         job_title_duty = request.POST.get('job_title_duty')
         base_moves = request.POST.get('base_moves')
         dismissal_reason = request.POST.get('dismissal_reason')
         advisor = request.POST.get('advisor')
         advisor_organisation = request.POST.get('advisor_organisation')
-        advisor_start_str = request.POST.get('advisor_start')
-        advisor_end_str = request.POST.get('advisor_end')
+        advisor_start = request.POST.get('advisor_start')
+        advisor_end = request.POST.get('advisor_end')
         advisor_address = request.POST.get('advisor_address')
         advisor_phone = request.POST.get('advisor_phone')
         advisor_socials = request.POST.get('advisor_socials')
@@ -84,14 +92,14 @@ def cv_add(request):
         language = request.POST.get('language')
         language_knowledge = request.POST.get('language_knowledge')
         language_years = request.POST.get('language_years')
-        docs = request.POST.get('docs')
-        tables = request.POST.get('tables')
-        presentaions = request.POST.get('presentaions')
-        prezi = request.POST.get('prezi')
-        touch_typing = request.POST.get('touch_typing')
+        docs = request.POST.get('docs', False)
+        tables = request.POST.get('tables', False)
+        presentation = request.POST.get('presentation', False)
+        prezi = request.POST.get('prezi', False)
+        touch_typing = request.POST.get('touch_typing', False)
         abroad_country = request.POST.get('abroad_country')
-        abroad_start_str = request.POST.get('abroad_start')
-        abroad_end_str = request.POST.get('abroad_end')
+        abroad_start = request.POST.get('abroad_start')
+        abroad_end = request.POST.get('abroad_end')
         abroad_reason = request.POST.get('abroad_reason')
         good_skills = request.POST.get('good_skills')
         linkedin = request.POST.get('linkedin')
@@ -99,8 +107,8 @@ def cv_add(request):
         twitter = request.POST.get('twitter')
         university = request.POST.get('university')
         faculty = request.POST.get('faculty')
-        edu_start_str = request.POST.get('edu_start')
-        edu_end_str = request.POST.get('edu_end')
+        edu_start = request.POST.get('edu_start')
+        edu_end = request.POST.get('edu_end')
         edu_country = request.POST.get('edu_country')
         edu_city = request.POST.get('edu_city')
         plan = request.POST.get('plan')
@@ -111,78 +119,31 @@ def cv_add(request):
         acq = request.POST.get('acq')
         acq_org = request.POST.get('acq_org')
         acq_job = request.POST.get('acq_job')
-        acq_start_str = request.POST.get('acq_start')
-        acq_end_str = request.POST.get('acq_end')
+        acq_start = request.POST.get('acq_start')
+        acq_end = request.POST.get('acq_end')
         acq_address = request.POST.get('acq_address')
         acq_phone = request.POST.get('acq_phone')
         acq_email = request.POST.get('acq_email')
         acq_socials = request.POST.get('acq_socials')
         achievement = request.POST.get('achievement')
         knowledge = request.POST.get('knowledge')
-        hostorical_person = request.POST.get('hostorical_person')
-        laptop = request.POST.get('laptop')
+        historical_person = request.POST.get('hostorical_person')
+        laptop = request.POST.get('laptop', False)
         change = request.POST.get('change')
-
-        birthday = datetime.strptime(birthday_str, '%Y-%m-%d').date()
-        last_job_start = datetime.strptime(last_job_start_str,'%Y-%m-%d').date() 
-        last_job_end = datetime.strptime(last_job_end_str,'%Y-%m-%d').date() 
-        advisor_start = datetime.strptime(advisor_start_str,'%Y-%m-%d').date() 
-        advisor_end = datetime.strptime(advisor_end_str,'%Y-%m-%d').date() 
-        abroad_start = datetime.strptime(abroad_start_str,'%Y-%m-%d').date() 
-        abroad_end = datetime.strptime(abroad_end_str,'%Y-%m-%d').date() 
-
-
-        if child_birthday_str:
-            child_birthday = datetime.strptime(child_birthday_str, '%Y-%m-%d').date()
-        else:
-            child_birthday = None
-
-        if qualification_start_str:
-            qualification_start = datetime.strptime(qualification_start_str, '%Y-%m-%d').date()
-        else:
-            qualification_start = None
         
-        if qualification_end_str:
-            qualification_end = datetime.strptime(qualification_end_str, '%Y-%m-%d').date()
-        else:
-            qualification_end = None
-
-        if edu_start_str:
-            edu_start = datetime.strptime(edu_start_str, '%Y-%m-%d').date()
-        else:
-            edu_start = None
-
-        if edu_end_str:
-            edu_end = datetime.strptime(edu_end_str, '%Y-%m-%d').date()
-        else:
-            edu_end = None
-        
-        if acq_start_str:
-            acq_start = datetime.strptime(acq_start_str, '%Y-%m-%d').date()
-        else:
-            acq_start = None
-
-        if acq_end_str:
-            acq_end = datetime.strptime(acq_end_str, '%Y-%m-%d').date()
-        else:
-            acq_end = None
-            
-        if not test_year:
+        if not test_year or test_score or exam_year or exam_score or education_info or interested or candidate or test or exam or education or qualification:
             test_year = None 
-        
-        if not test_score:
             test_score = None 
-
-        if not exam_year:
             exam_year = None
-
-        if not exam_score:
             exam_score = None
-
-        if not education_info:
             education_info = None
-
-
+            interested = False
+            candidate = False
+            test = False
+            exam = False
+            education = False
+            qualification= False
+        
         cv = CV.objects.create( 
             user = request.user,
             avatar = avatar,
@@ -236,7 +197,7 @@ def cv_add(request):
             language_years = language_years,
             google_docs = docs,
             google_tables = tables,
-            google_presentation = presentaions,
+            google_presentation = presentation,
             prezi = prezi,
             touch_typing = touch_typing,
             abroad_country = abroad_country,
@@ -269,13 +230,14 @@ def cv_add(request):
             acq_socials = acq_socials,
             achievement = achievement,
             knowledge = knowledge,
-            historical_person = hostorical_person,
+            historical_person = historical_person,
             laptop = laptop,
             change = change
         )
         cv.save()
         return redirect("/")
     return render(request, "jobs/add_cv.html", locals())
+
 
 def cv_download(request):
     setting = Settings.objects.latest('id')
@@ -300,16 +262,16 @@ def cv_download(request):
             doc = Document()
             doc.add_heading('Resume', 0)
             doc.add_paragraph(f"User: {request.user}")
-            word_stream = BytesIO()
-            doc.save(word_stream)
-            word_stream.seek(0)
+            wordeam = BytesIO()
+            doc.save(wordeam)
+            wordeam.seek(0)
 
         elif cv_file.name.endswith('.pdf'):
-            pdf_stream = BytesIO()
-            pdf_canvas = canvas.Canvas(pdf_stream)
+            pdfeam = BytesIO()
+            pdf_canvas = canvas.Canvas(pdfeam)
             pdf_canvas.drawString(100, 800, f"Name: {request.user}")
             pdf_canvas.save()
-            pdf_stream.seek(0)
+            pdfeam.seek(0)
 
         return redirect('/')
 

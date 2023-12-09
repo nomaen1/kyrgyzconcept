@@ -42,7 +42,7 @@
                       <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu dropdown-menu-right">
                          <div class="user-email">
                             <div class="user">
-                               <span class="thumb"><img {% if user.profile_image %} src="{{user.profile_image.url}}" {% else %} src="{% static 'profile/logo_hahas.png' %}"  {% endif %}  alt=""></span>
+                               <span class="thumb"><img {% if user.profile_image %} src="{{user.profile_image.url}}" {%else%} src="{% static 'profile/logo_hahas.png' %}"{% endif %}alt=""></span>
                                <div class="user-info">
                                   <h5>{{user.username}}</h5>
                                   <span> bn </span>
@@ -72,27 +72,6 @@
                     <span class="nav-text">Главная страница</span>
                 </a>
             </li>
-            {% comment %} <li><a href="/balance.html">
-                    <span><i class="ri-wallet-line"></i></span>
-                    <span class="nav-text">Wallet</span>
-                </a>
-            </li>
-            <li><a href="/bill.html">
-                    <span><i class="ri-secure-payment-line"></i></span>
-                    <span class="nav-text">Payment</span>
-                </a>
-            </li>
-            <li><a href="/invoice.html">
-                    <span><i class="ri-file-copy-2-line"></i></span>
-                    <span class="nav-text">Invoice</span>
-                </a>
-            </li>
-            <li><a href="/settings-profile.html">
-                    <span><i class="ri-settings-3-line"></i></span>
-                    <span class="nav-text">Settings</span>
-                </a>
-            </li>
-            {% endcomment %}
             <li class="logout"><a href="{% url 'logout' %}">
                     <span><i class="ri-logout-circle-line"></i></span>
                     <span class="nav-text">Выйти</span>
@@ -102,36 +81,27 @@
     </div>
 </div>
 
-    <div class="content-body">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="page-title">
-                        <div class="row align-items-center justify-content-between">
-                            <div class="col-xl-4">
-                                <div class="page-title-content">
-                                    <h3>Профиль</h3>
-                                    <p class="mb-2">Добро пожаловать в Профиль {{setting.title}}</p>
-                                </div>
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page-title">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-xl-4">
+                            <div class="page-title-content">
+                                <h3>Профиль</h3>
+                                <p class="mb-2">Добро пожаловать в Профиль {{setting.title}}</p>
                             </div>
-                            <div class="col-auto">
-                                <div class="breadcrumbs"><a href="{% url 'index'%}">Главная страница </a><span><i
-                                            class="ri-arrow-right-s-line"></i></span><a href="{% url 'profile' request.user.id %}">Профиль</a></div>
-                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="breadcrumbs"><a href="{% url 'index'%}">Главная страница </a><span><i
+                                        class="ri-arrow-right-s-line"></i></span><a href="{% url 'profile' request.user.id %}">Профиль</a></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-12 col-xl-12">
-                    <div class="settings-menu">
-    <a href="settings-profile.html">Профиль </a>
-    {% comment %} <a href="settings-application.html">Application</a>
-    <a href="settings-security.html">Security</a>
-    <a href="settings-activity.html">Activity</a>
-    <!-- <a href="settings-privacy.html">Privacy</a> -->
-    <a href="settings-payment-method.html">Payment Method</a>
-    <a href="settings-api.html">API</a>
-    <!-- <a href="settings-fees.html">Fees</a> -->
-</div> {% endcomment %}
+            </div>
+            <div class="col-xxl-12 col-xl-12">
+                <div class="settings-menu">
                     <div class="row">
                         <div class="col-xxl-6 col-xl-6 col-lg-6">
                             <div class="card">
@@ -139,18 +109,17 @@
                                     <h4 class="card-title">Профиль пользователя</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form method = "POST" enctype="multipart/form-data">
+                                    <form method ="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="row g-3">
                                             <div class="col-xxl-12 col-12 mb-3">
                                                 <label class="form-label">Имя пользователя</label>
-                                                <input type="text" name = "username" class="form-control" {% if user.username %} value="{{user.username}}" {% else %} placeholder="admin" {% endif %}>
+                                                <input type="text" name = "username" class="form-control" {% if user.username %} value="{{user.username}}" {%else%} placeholder="admin" {%endif%}> 
                                             </div>
-                                            {% if user.profile_image %}
                                             <div class="col-xxl-12 col-12 mb-3">
                                                 <div class="d-flex align-items-center">
-                                                    <img class="me-3 rounded-circle me-0 me-sm-3"
-                                                        src="{{ user.profile_image.url }}" width="55" height="55" alt="">
+                                                    <img class="me-3 rounded-circle me-0 me-sm-3" 
+                                                        {% if user.profile_image %} src="{{ user.profile_image.url }}" {% else %} src="{% static 'profile/logo_ha.png' %}" {% endif %} width="55" height="55" alt="">
                                                     <div class="media-body">
                                                         <h4 class="mb-0">{{user.username}}</h4>
                                                         <p class="mb-0">Максимальный размер фотографии 20мб
@@ -158,19 +127,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {% else %}
-                                            <div class="col-xxl-12 col-12 mb-3">
-                                                <div class="d-flex align-items-center">
-                                                    <img class="me-3 rounded-circle me-0 me-sm-3"
-                                                        src="{% static 'profile/logo_ha.png' %}" width="55" height="55" alt="">
-                                                    <div class="media-body">
-                                                        <h4 class="mb-0">{{user.username}}</h4>
-                                                        <p class="mb-0">Максимальный размер фотографии 20мб
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {% endif %}
                                             <div class="col-xxl-12 col-12 mb-3">
                                                 <div class="form-file">
                                                     <input name="profile_image" type="file" class="form-file-input" >
@@ -220,12 +176,12 @@
                                     </h4>
                                 </div>
                                 <div class="card-body">
-                                    <form method="post" >
+                                    <form method="POST" >
                                         {% csrf_token %}
                                         <div class="row g-4">
                                             <div class="col-xxl-6 col-xl-6 col-lg-6">
                                                 <label class="form-label">Полное Имя</label>
-                                                <input type="text" class="form-control" {% if user.fullname %} value="{{ user.fullname}}" {% else %} placeholder="Тыныбеков Жанышбек Нурбекович" {% endif %}
+                                                <input type="text" class="form-control" {% if user.fullname %} value="{{ user.fullname}}" {% else %} placeholder="Тыныбеков Жанышбек Нурбекович"{% endif %} 
                                                     name="fullname">
                                             </div>
                                             <div class="col-xxl-6 col-xl-6 col-lg-6">
@@ -250,13 +206,606 @@
                                     </form>
                                 </div>
                             </div>
+                            {% if cv %}
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Резюме пользователя</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="row g-4">
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Ваше фото</label>
+                                                    <br>
+                                                    <img src="{{ cv.avatar.url }}" width="150" height="150">
+                                                    <br>
+                                                    <input style="margin-top: 10px;" name="avatar" type="file" class="form-file-input" >
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Телефонный номер</label>
+                                                    <input type="text" class="form-control" {% if cv.phone_number %}  value="{{ cv.phone_number }}" {% else %} placeholder="0999-99-99-99" {% endif %} 
+                                                        name="phone_number">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Адрес</label>
+                                                    <input type="text" class="form-control" {% if cv.address %} value="{{ cv.address}}" {% else %} placeholder="example@gmail.com" {% endif %}
+                                                        name="address">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Гражданство</label>
+                                                    <input type="text" class="form-control" {% if cv.citizenship %} value="{{cv.citizenship}}" {% else %} placeholder="Ош" {% endif %} 
+                                                        name="citizenship">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Дата рождения</label>
+                                                    <input type="text" class="form-control" {% if cv.birthday %} value="{{cv.birthday}}" {% else %} placeholder="XXXX-XX-XX" {%endif %}
+                                                        name="birthday">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Пол</label>
+                                                    <input type="text" class="form-control" {% if cv.gender %} value="{{cv.gender}}" {% else %} placeholder="Мужской" {% endif %} 
+                                                        name="gender">
+                                                </div>
+
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Дети</label>
+                                                    <input type="text" class="form-control" {% if cv.child_name %} value="{{cv.child_name }}" {% else %} placeholder="Нет" {%endif%}
+                                                        name="child_name">
+                                                </div>
+                                            
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Дата рождения ребенка</label>
+                                                    <input type="text" class="form-control" {% if cv.child_birthday %} value="{{ cv.child_birthday }}" {% else %} placeholder="YYYY-MM-DD" {% endif %}
+                                                        name="child_birthday">
+                                                </div>
+                                                
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Источник информации о вакансии </label>
+                                                    <input type="text" class="form-control" value="{{ cv.source }}"
+                                                        name="source">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Почему Вы выбрали именно эту позицию? </label>
+                                                    <input type="text" class="form-control" value="{{ cv.reason }}"
+                                                        name="reason">
+                                                </div>
+                                                
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Укажите интересные для вас позиции</label>
+                                                    <input type="text" class="form-control" {% if cv.interested_position %} value="{{cv.interested_position }}" {% else %} placeholder="Нет" {% endif %}
+                                                        name="interested_position">
+                                                </div>
+                                            
+                                            
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Общереспубликанское тестирования (Год)</label>
+                                                    <input type="text" class="form-control" {% if cv.test_year %} value="{{cv.test_year }}" {% else %} placeholder="Нет" {% endif %}
+                                                        name="test_year">
+                                                </div>
+                                            
+                                            
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Общереспубликанское тестирования (Балл)</label>
+                                                    <input type="text" class="form-control" {% if cv.test_score %} value="{{cv.test_score }}" {% else %} placeholder="Нет" {% endif %}
+                                                        name="test_score">
+                                                </div>
+                                            
+                                            
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">IELTS/TOEFL(Год)</label>
+                                                    <input type="text" class="form-control" {% if cv.exam_year %} value="{{cv.exam_year }}" {% else %} placeholder="Нет" {% endif %}
+                                                        name="exam_year">
+                                                </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">IELTS/TOEFL(Балл)</label>
+                                                        <input type="text" class="form-control" {% if cv.exam_score %} value="{{cv.exam_score }}" {% else %} placeholder="Нет" {% endif %}
+                                                            name="exam_score">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Дальнейшее обучение</label>
+                                                        <input type="text" class="form-control" {% if cv.education_info %} value="{{cv.education_info }}" {% else %} placeholder="Нет" {% endif %}
+                                                            name="education_info">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Название квалификации</label>
+                                                        <input type="text" class="form-control" {% if cv.qualification_name %} value="{{cv.qualification_name }}" {% else %} placeholder="Нет" {% endif %}
+                                                            name="qualification_name">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Страна квалификации</label>
+                                                        <select name="qualification_country" class="form-control" aria-valuetext="" id="">
+                                                            {% if cv.qualification_country %}
+                                                            <option value="">{{ cv.qualification_country }}</option>
+                                                            {% else %}
+                                                            <option value="">Выберите страну</option>
+                                                            {% endif %}
+                                                            <option value="США">США</option>
+                                                            <option value="Россия">Россия</option>
+                                                            <option value="Казахстан">Казахстан</option>
+                                                            <option value="Кыргызстан">Кыргызстан</option>
+                                                        </select>
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Город квалификации</label>
+                                                        <input type="text" class="form-control" {% if cv.qualification_city %} value="{{cv.qualification_city }}" {% else %} placeholder="Нет" {% endif %}
+                                                            name="qualification_city">
+                                                    </div>
+                                            
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Дата начала</label>
+                                                        <input type="text" class="form-control" {% if cv.qualification_start %} value="{{cv.qualification_start }}" {% else %} placeholder="Дата начала" {% endif %}
+                                                            name="qualification_start ">
+                                                    </div>
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Дата окончания</label>
+                                                        <input type="text" class="form-control" {% if cv.qualification_end %} value="{{cv.qualification_end }}" {% else %} placeholder="Дата окончания" {% endif %}
+                                                            name="qualification_end ">
+                                                    </div>
+                                                
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Название организации </label>
+                                                    <input type="text" class="form-control" {% if cv.organisation_name %} value="{{cv.organisation_name }}" {% else %} placeholder="Нет" {% endif %}
+                                                        name="organisation_name ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Адрес организации </label>
+                                                    <input type="text" class="form-control" {% if cv.organisation_address %} value="{{cv.organisation_address }}" {% else %} placeholder="Нет" {% endif %}
+                                                        name="organisation_address ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Должность</label>
+                                                    <input type="text" class="form-control" {% if cv.job_title %} value="{{cv.job_title }}" {% else %} placeholder="Нет" {% endif %}
+                                                        name="job_title ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Дата начала</label>
+                                                    <input type="text" class="form-control"  value="{{cv.last_job_start }}"
+                                                        name="last_job_start ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Дата окончания</label>
+                                                    <input type="text" class="form-control" value="{{cv.last_job_end }}"
+                                                        name="last_job_end ">
+                                                </div>
+
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Основные достижения</label>
+                                                    <input type="text" class="form-control" {% if cv.base_moves %} value="{{cv.base_moves }}" {% else %} placeholder="Нет" {% endif %}
+                                                        name="base_moves ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Причина увольнения</label>
+                                                    <input type="text" class="form-control" {% if cv.dismissal_reason %} value="{{cv.dismissal_reason }}"{% else %} placeholder="Нет" {% endif %}
+                                                        name="dissmissal_reason">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Ваши рекомендатели</label>
+                                                    <input type="text" class="form-control" {% if cv.advisor %} value="{{ cv.advisor }}" {% else %} placeholder="Нет" {% endif %}
+                                                        name="advisor ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Организация рекомендателя</label>
+                                                    <input type="text" class="form-control" value="{{cv.advisor_organisation }}"
+                                                        name="advisor_organisation ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Дата начала</label>
+                                                    <input type="text" class="form-control" value="{{cv.advisor_start }}"
+                                                        name="advisor_start ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Дата окончания</label>
+                                                    <input type="text" class="form-control" value="{{cv.advisor_end }}"
+                                                        name="advisor_end ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Адрес рекомендателя</label>
+                                                    <input type="text" class="form-control" value="{{cv.advisor_address }}"
+                                                        name="advisor_address ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Номер телефона рекомендателя</label>
+                                                    <input type="text" class="form-control" value="{{cv.advisor_address }}"
+                                                        name="advisor_phone">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Соц сети рекомендателя</label>
+                                                    <input type="text" class="form-control" value="{{cv.advisor_socials }}"
+                                                        name="advisor_socials ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Должность рекомендателя</label>
+                                                    <select name="advisor_job" class="form-control" id="">
+                                                        {% if cv.advisor_job %}
+                                                        <option value="">{{ cv.advisor_job }}</option>
+                                                        {% else %}
+                                                        <option value="">Выберите должность</option>
+                                                        {% endif %}
+                                                        <option value="Руководитель">Руководитель</option>
+                                                        <option value="Коллега">Коллега</option>
+                                                        <option value="Родственные отношения">Родственные отношения</option>
+                                                        <option value="Другое">Другое</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Желаемый размер Вашего вознаграждения на стажерский период </label>
+                                                    <input type="text" class="form-control" value="{{cv.internship_salary }}"
+                                                        name="internship_salary ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Желаемый размер Вашего вознаграждения на основной период </label>
+                                                    <input type="text" class="form-control" value="{{cv.job_salary }}"
+                                                        name="job_salary ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Знание языков</label>
+                                                    <input type="text" class="form-control" value="{{cv.language }}"
+                                                        name="language ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Степень знания</label>
+                                                    <input type="text" class="form-control" value="{{cv.language_knowledge }}"
+                                                        name="language_knowledge ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Сколько лет изучал</label>
+                                                    <input type="text" class="form-control" value="{{cv.language_years }}"
+                                                        name="language_years ">
+                                                </div>
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Компьютерные навыки (Google Документы)</label>
+                                                        <br>
+                                                        <input type="checkbox" style="margin-top: 15px;" name="docs" value="True" {% if cv.google_docs %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                        <input type="checkbox" name="docs" value="False" {% if not cv.google_docs %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Компьютерные навыки (Google Таблицы)</label>
+                                                        <br>
+                                                        <input type="checkbox" style="margin-top: 15px;" name="tables" value="True" {% if cv.google_tables %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                        <input type="checkbox" name="tables" value="False" {% if not cv.google_tables %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Компьютерные навыки (Google Презентации)</label>
+                                                        <br>
+                                                        <input type="checkbox" style="margin-top: 15px;" name="presentaion" value="True" {% if cv.google_presentation %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                        <input type="checkbox" name="presentaion" value="False" {% if not cv.google_presentation %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Компьютерные навыки (Prezi)</label>
+                                                        <br>
+                                                        <input type="checkbox" style="margin-top: 15px;" name="prezi" value="True" {% if cv.prezi %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                        <input type="checkbox" name="prezi" value="False" {% if not cv.prezi %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Компьютерные навыки (Слепая печать)</label>
+                                                        <br>
+                                                        <input type="checkbox" style="margin-top: 15px;" name="touch_typing" value="True" {% if cv.touch_typing %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                        <input type="checkbox" name="touch_typing" value="False" {% if not cv.touch_typing %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                    </div>
+                                                
+                                                
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Пребывание за границей</label>
+                                                    <select name="abroad_country" class="form-control" id="">
+                                                        {% if cv.abroad_country %}
+                                                        <option value="">{{ cv.abroad_country }}</option>
+                                                        {% else %}
+                                                        <option value="">Выберите страну</option>
+                                                        {% endif %}
+                                                        <option value="США">США</option>
+                                                        <option value="Россия">Россия</option>
+                                                        <option value="Казахстан">Казахстан</option>
+                                                        <option value="Кыргызстан">Кыргызстан</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Дата начала</label>
+                                                    <input type="text" class="form-control" value="{{cv.abroad_start }}"
+                                                        name="abroad_start ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Дата окончания</label>
+                                                    <input type="text" class="form-control" value="{{cv.abroad_end }}"
+                                                        name="abroad_end ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Причина визита</label>
+                                                    <input type="text" class="form-control" value="{{cv.abroad_reason }}"
+                                                        name="abroad_reason ">
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Полезные навыки</label>
+                                                    <input type="text" class="form-control" value="{{cv.good_skills }}"
+                                                        name="good_skills ">
+                                                </div>
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Linkedin</label>
+                                                        <input type="url" class="form-control" value="{{cv.linkedin }}"
+                                                            name="linkedin ">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Facebook</label>
+                                                        <input type="url" class="form-control" value="{{cv.facebook }}"
+                                                            name="facebook ">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Twitter</label>
+                                                        <input type="url" class="form-control" value="{{cv.twitter }}"
+                                                            name="twitter ">
+                                                    </div>
+                                                
+                                                
+                                                    <h4 class="card-title">Дополнительная информация о пользователе</h4>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Университет</label>
+                                                        <input type="text" class="form-control" {% if cv.university %} value="{{ cv.university }}" {% else %} placeholder="ВУЗ" {% endif %}
+                                                            name="university ">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Факультет</label>
+                                                        <input type="text" class="form-control" {% if cv.faculty %} value="{{cv.faculty }}" {% else %} placeholder="Факультет" {% endif %}
+                                                            name="faculty ">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Дата начала</label>
+                                                        <input type="text" class="form-control" {% if cv.edu_start %} value="{{cv.edu_start }}" {% else %} placeholder="XXXX-XX-XX" {% endif %}>
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Дата окончания</label>
+                                                        <input type="text" class="form-control" {% if cv.edu_end %} value="{{cv.edu_end }}" {% else %} placeholder="XXXX-XX-XX" {% endif %}
+                                                            name="edu_end">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Страна</label>
+                                                        <input type="text" class="form-control" {% if cv.edu_country %} value="{{cv.edu_country }}" {% else %} placeholder="Страна" {% endif %}
+                                                            name="edu_country">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Город</label>
+                                                        <input type="text" class="form-control" {% if cv.edu_city %} value="{{cv.edu_city }}" {% else %} placeholder="Город" {% endif %}
+                                                            name="edu_city">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Планы на ближайшие 3-5 лет</label>
+                                                        <input type="text" class="form-control" {% if cv.plan %} value="{{cv.plan }}" {% else %} placeholder="План" {% endif %}
+                                                            name="plan">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Хобби</label>
+                                                        <input type="text" class="form-control" {% if cv.hobby %} value="{{cv.hobby }}" {% else %} placeholder="Хобби" {% endif %}
+                                                            name="hobby">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Кто такой Джон Голт?</label>
+                                                        <input type="text" class="form-control" {% if cv.who %} value="{{cv.who }}" {% else %} placeholder="Джон Голт - он..." {% endif %}
+                                                            name="who">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">3 Лучших качества</label>
+                                                        <input type="text" class="form-control" {% if cv.top_qualities %} value="{{cv.top_qualities }}" {% else %} placeholder="3 Лучшших качества" {% endif %}
+                                                            name="top_qualities">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">3 Худших качества</label>
+                                                        <input type="text" class="form-control" {% if cv.worst_qualities %} value="{{cv.worst_qualities }}" {% else %} placeholder="3 Худших качества" {% endif %}
+                                                            name="worst_qualities">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Знакомые в Kyrgyz Concept</label>
+                                                        <input type="text" class="form-control" {% if cv.acq %} value="{{cv.acq }}" {% else %} placeholder="Знакомый, друг, родственник" {% endif %}
+                                                            name="acq">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Организация знакомого</label>
+                                                        <input type="text" class="form-control" {% if cv.acq_org %} value="{{cv.acq_org }}" {% else %} placeholder="Организация знакомого" {% endif %}
+                                                            name="acq_org">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Должность знакомого</label>
+                                                        <input type="text" class="form-control" {% if cv.acq_title %} value="{{cv.acq_title }}" {% else %} placeholder="Должность знакомого" {% endif %}
+                                                            name="acq_title">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Дата начала</label>
+                                                        <input type="text" class="form-control" {% if cv.acq_start %} value="{{cv.acq_start }}" {% else %} placeholder="XXXX-XX-XX" {% endif %}
+                                                            name="acq_start">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Дата конца</label>
+                                                        <input type="text" class="form-control" {% if cv.acq_end %} value="{{cv.acq_end }}" {% else %} placeholder="XXXX-XX-XX" {% endif %}
+                                                            name="acq_end">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Адрес знакомого</label>
+                                                        <input type="text" class="form-control" {% if cv.acq_address %} value="{{cv.acq_address }}" {% else %} placeholder="Адрес знакомого" {% endif %}
+                                                            name="acq_address">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Номер телефона знакомого</label>
+                                                        <input type="text" class="form-control" {% if cv.acq_phone %} value="{{cv.acq_phone }}" {% else %} placeholder="Номер телефона знакомого" {% endif %}
+                                                            name="acq_phone">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Эл.почта знакомого</label>
+                                                        <input type="text" class="form-control" {% if cv.acq_email %} value="{{cv.acq_email }}" {% else %} placeholder="Эл.почта знакомого" {% endif %}
+                                                            name="acq_email">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Соц.сети знакомого</label>
+                                                        <input type="text" class="form-control" {% if cv.acq_socials %} value="{{cv.acq_socials }}" {% else %} placeholder="Соц.сети знакомого" {% endif %}
+                                                            name="acq_socials">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Достижения за последние три года</label>
+                                                        <input type="text" class="form-control" {% if cv.achievement %} value="{{cv.achievement }}" {% else %} placeholder="Ваши достижения" {% endif %}
+                                                            name="achievement">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Знания о Kyrgyz Concept</label>
+                                                        <input type="text" class="form-control" {% if cv.knowledge %} value="{{cv.knowledge }}" {% else %} placeholder="Знания о Kyrgyz Concept" {% endif %}
+                                                            name="knowledge">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Историческая личность</label>
+                                                        <input type="text" class="form-control" {% if cv.historical_person%} value="{{cv.historical_person }}" {% else %} placeholder="ВУЗ" {% endif %}
+                                                            name="historical_person">
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Имеется ли ноутбук</label>
+                                                        <br>
+                                                        <input type="checkbox" style="margin-top: 15px;" name="laptop" value="True" {% if cv.laptop%} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Да</label>
+                                                        <input type="checkbox" name="laptop" value="" {% if not cv.laptop %} checked {% endif %}>
+                                                        <label style="padding-left: 10px; padding-right: 20px;">Нет</label>
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                        <label class="form-label">Предложения об изменении формата Резюме</label>
+                                                        <input type="text" class="form-control" {% if cv.change %} value="{{cv.change }}" {% else %} placeholder="Что бы вы хотели изменить?" {% endif %}
+                                                            name="change">
+                                                    </div>
+                                                
+                                                
+                                                <div class="col-12">
+                                                    <button type="submit" name="update_cv" class="btn btn-primary pl-5 pr-5">Сохранить</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if ready_cv %}
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Готовое резюме пользователя</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="row g-4">
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Ваше фото</label>
+                                                    <br>
+                                                    <img src="{{ ready_cv.avatar.url }}" width="150" height="150">
+                                                    <br>
+                                                    <input style="margin-top: 10px;" name="avatar" type="file" class="form-file-input" >
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                                    <label class="form-label">Ваше резюме</label>
+                                                    <br>
+                                                    <button class="btn btn-primary pl-5 pr-5"><a href="{{ ready_cv.cv_file.url }}" style="color: white  ;" target="_blank">Скачать резюме</a></button>
+                                                    <br>
+                                                    <br>
+                                                    <label class="form-label">Изменить резюме</label>
+                                                    <br>
+                                                    <input type="file" name="cv_file">
+                                                    
+                                                    <div style="color: red">
+                                                        {% for message in messages %}
+                                                            {{ message }}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" name="update_ready_cv" class="btn btn-primary pl-5 pr-5">Сохранить</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+</div>
 
 </div>
 

@@ -46,38 +46,7 @@
     
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmdG8C6ItElq5ipuFv6O9AE48wyZm_vqU&callback=initMap">
     </script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Сначала скрываем поля для ввода имени и даты рождения ребенка
-            // document.getElementById('child_name').style.display = 'none';
-            // document.getElementById('child_birthday').style.display = 'none';
-        
-            // Обработчик события для чекбоксов
-            // document.querySelectorAll('input[name="children"]').forEach(function(checkbox) {
-            //     checkbox.addEventListener('change', function() {
-            //         // Если выбран чекбокс "Да", показываем поля для ввода имени и даты рождения ребенка
-            //         if (this.value === 'True') {
-            //             document.getElementById('child_name').style.display = 'inline';
-            //             document.getElementById('child_birthday').style.display = 'inline';
-            //         } else {
-            //             // Если выбран чекбокс "Нет", скрываем поля для ввода имени и даты рождения ребенка
-            //             document.getElementById('child_name').style.display = 'none';
-            //             document.getElementById('child_birthday').style.display = 'none';
-            //         }
-            //     });
-            // });
-        
-            // Обработчик события для кнопки "Удалить"
-            document.querySelector('.remove-child').addEventListener('click', function() {
-                // Сбрасываем значения полей для имени и даты рождения ребенка и скрываем эти поля
-                document.querySelector('input[name="child_name"]').value = '';
-                document.querySelector('input[name="child_birthday"]').value = '';
-                document.getElementById('child_name').style.display = 'none';
-                document.getElementById('child_birthday').style.display = 'none';
-            });
-        });
-        </script>
+
 
 </body>
 
