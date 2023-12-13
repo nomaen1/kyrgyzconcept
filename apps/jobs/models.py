@@ -118,7 +118,7 @@ class CV(models.Model):
     acq_end = models.CharField(max_length=255, verbose_name="Дата конца", null=True, blank=True)
     acq_address = models.CharField(max_length=255, verbose_name="Адрес", null=True, blank=True)
     acq_phone = models.CharField(max_length=255, verbose_name="Телефон", null=True, blank=True)
-    acq_email = models.CharField(max_length=255, verbose_name="Emaik", unique=True, null=True, blank=True)
+    acq_email = models.CharField(max_length=255, verbose_name="Email", null=True, blank=True)
     acq_socials = models.CharField(max_length=255, verbose_name="Аккаунт в соц.сетях", null=True, blank=True)
     achievement = models.CharField(max_length=255, verbose_name="Опишите какое-либо свое достижение за последние три года (которое характеризует Вас как личность, подходящую для занятия позиции в Компании)", null=True, blank=True)
     knowledge = models.CharField(max_length=255, verbose_name="Что Вам известно о компании Kyrgyz Concept? Почему Вы хотите с ней сотрудничать?", null=True, blank=True)

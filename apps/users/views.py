@@ -11,7 +11,6 @@ from apps.jobs.models import CV, ReadyCV
 
 
 def register(request):
-    current_date = datetime.now()
     setting = Settings.objects.latest('id')
 
     if request.method == "POST":
@@ -22,9 +21,19 @@ def register(request):
         password = request.POST.get('password')
         password2 = request.POST.get('password2')
 
+        if not (any(c.isalpha() for c in password) and any(c.isdigit() for c in password)):
+            messages.error(request, 'Пароль должен состоять из букв и цифр')
+            return redirect('register')
+
+        valid_email_formats = ['gmail', 'email', 'icloud']
+        if not any(format in email for format in valid_email_formats):
+            messages.error(request, 'Неверный формат почты')
+            return redirect('register')
+
         if password != password2:
             messages.error(request, 'Пароли не совпадают')
             return redirect('register')
+            
         if len(password) < 8:
             messages.error(request, 'Пароль должен быть не менее 8 символов')
             return redirect('register')
@@ -59,7 +68,6 @@ def user_login(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, 'Вы успешно вошли в систему.')
             return redirect('/')
         else:
             messages.error(request, 'Неправильный email или пароль.')

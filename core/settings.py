@@ -221,11 +221,12 @@ CKEDITOR_CONFIGS = {
 
 
 #SMTP
-EMAIL_USE_TLS = True  # Использовать TLS для защищенного соединения
-EMAIL_HOST = 'smtp.gmail.com'  # Адрес SMTP сервера Gmail
-EMAIL_PORT = 587  # Порт для подключения к SMTP серверу Gmail
-EMAIL_HOST_USER = 'bullabratan@gmail.com'
-EMAIL_HOST_PASSWORD = 'zlrwdyljhsupxnfo'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Используйте подходящий бэкенд отправки электронных писем
+EMAIL_HOST = 'smtp.gmail.com'  # Замените на свой SMTP-сервер
+EMAIL_PORT = 587  # Порт SMTP-сервера
+EMAIL_USE_TLS = True  # Используйте True, если требуется TLS
+EMAIL_HOST_USER = 'tynybekovjanyshbek@gmail.com'  # Замените на свой адрес электронной почты
+EMAIL_HOST_PASSWORD = 'ifpcntlxlypsgyav'  # Замените на пароль от вашей почты
 
 
 SOCIALACCOUNT_QUERY_EMAIL = True
