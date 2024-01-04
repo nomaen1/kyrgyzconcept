@@ -24,7 +24,7 @@ def index(request):
         cv2 = ReadyCV.objects.get(user=request.user)
     except:
         pass
-    return render(request, "jobs/company_listing.html", locals())
+    return render(request, "jobs/index.html", locals())
 
 @login_required(login_url='login')
 def jobs_detail(request, id):
